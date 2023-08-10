@@ -75,10 +75,9 @@
     }
     
     sortInventorsByYearsLived()
-    
+
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
 
     const parisBoulevard = ['Boulevard Auguste-Blanqui','Boulevard Barbès','Boulevard Beaumarchais','Boulevard de l\'Amiral-Bruix',
     'Boulevard Mortier','Boulevard Poniatowski','Boulevard Soult','Boulevard des Capucines','Boulevard de la Chapelle',
@@ -97,6 +96,12 @@
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    function sortPeopleByLastName() {
+      console.log(people.map(el => el.split(',')).sort().map(el => el.join(',').replaceAll(',', '')))
+    }
+    
+    sortPeopleByLastName()
+
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
