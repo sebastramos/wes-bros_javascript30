@@ -102,11 +102,22 @@
     
     sortPeopleByLastName()
 
-
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-    // filter element,order
+    
+    const car = data.filter(el => el === 'car').length
+    const truck = data.filter(el => el === 'truck').length
+    const bike = data.filter(el => el === 'bike').length
+    const walk = data.filter(el => el === 'walk').length
+    const van = data.filter(el => el === 'van').length
+
+    console.log(car)
+    console.log(truck)
+    console.log(bike)
+    console.log(walk)
+    console.log(van)
+    
   </script>
 </body>
 </html>
