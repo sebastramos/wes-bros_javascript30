@@ -38,85 +38,108 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
-    function bornIn1500() {
-    	let select = inventors.filter(el => el.year >= 1500 && el.year < 1600)
-    	console.log(select.map(el => `${el.first} ${el.last} was born in ${el.year}`))
-    }
-    
-    bornIn1500()
+
+      function bornIn1500() {
+      	let select = inventors.filter(el => el.year >= 1500 && el.year < 1600)
+      	console.table(select.map(el => `${el.first} ${el.last} was born in ${el.year}`))
+      }
+      bornIn1500()
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
-    function firstNamesAndLastNames() {
-    	console.log(inventors.map(el => `${el.first} ${el.last}`))
-    }
-    
-    firstNamesAndLastNames()
+
+      function firstNamesAndLastNames() {
+      	console.table(inventors.map(el => `${el.first} ${el.last}`))
+      }
+      firstNamesAndLastNames()
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
-    function sortInventorsOldestToYoungest() {
-	       console.log(inventors.map(el => `${el.year}, ${el.first} ${el.last}`).sort())
-    }
 
-    sortInventorsOldestToYoungest()
+      // Solution 1
+      function sortInventorsOldestToYoungest() {
+	         console.table(inventors.map(el => `${el.year}, ${el.first} ${el.last}`).sort())
+      }
+      sortInventorsOldestToYoungest()
+
+      // Solution 2
+      const ordered = inventors.sort((a,b) => a.year - b.year)
+      console.table(ordered)
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
-    function totalInventorsLives() {
-      console.log(inventors.map(el => Number(`${el.passed - el.year}`)).reduce((a,b) => a + b))
-    }
-    
-    totalInventorsLives()
+
+      // Solution 1
+      function totalInventorsLives() {
+       console.table(inventors.map(el => Number(`${el.passed - el.year}`)).reduce((a,b) => a + b))
+      }
+
+      totalInventorsLives()
+
+      // Solution 2
+      const totalYears = inventors.reduce((total, inventor) => {
+        return total + (inventor.passed - inventor.year)
+      }, 0)
+
+      console.log(totalYears)
 
     // 5. Sort the inventors by years lived
-    function sortInventorsByYearsLived() {
-    	console.log(inventors.map(el => `${el.passed - el.year}, ${el.first} ${el.last}`).sort())
-    }
+      
+      Solution 1
+      function sortInventorsByYearsLived() {
+      	console.table(inventors.map(el => `${el.passed - el.year}, ${el.first} ${el.last}`).sort().reverse())
+      }
+      sortInventorsByYearsLived()
+
+      // Solution 2
+      const oldest = inventors.sort((a,b) => {
+        const lastGuy = a.passed - a.year
+        const nextGuy = b.passed - b.year
+        return lastGuy > nextGuy ? -1 : 1
+      })
+      console.table(oldest)
+
+    // // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
+    // // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+
+    // const parisBoulevard = ['Boulevard Auguste-Blanqui','Boulevard Barbès','Boulevard Beaumarchais','Boulevard de l\'Amiral-Bruix',
+    // 'Boulevard Mortier','Boulevard Poniatowski','Boulevard Soult','Boulevard des Capucines','Boulevard de la Chapelle',
+    // 'Boulevard de Clichy','Boulevard du Crime','Boulevard du Général-d\'Armée-Jean-Simon','Boulevard Haussmann',
+    // 'Boulevard de l\'Hôpital','Boulevard des Italiens','Boulevard Lefebvre','Boulevard de la Madeleine',
+    // 'Boulevard de Magenta','Boulevard Malesherbes','Boulevard Marguerite-de-Rochechouart','Boulevard Montmartre',
+    // 'Boulevard du Montparnasse','Boulevard Raspail','Boulevard Richard-Lenoir','Boulevard Saint-Germain',
+    // 'Boulevard Saint-Michel','Boulevard de Sébastopol','Boulevard de Strasbourg','Boulevard du Temple',
+    // 'Boulevard Voltaire','Boulevard de la Zone']
+
+    // function pariseBoulevardSelection() {
+    //   console.table(parisBoulevard.filter(el => el.includes(' de ')))
+    // }
     
-    sortInventorsByYearsLived()
+    // pariseBoulevardSelection()
 
-    // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
-    // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
-    const parisBoulevard = ['Boulevard Auguste-Blanqui','Boulevard Barbès','Boulevard Beaumarchais','Boulevard de l\'Amiral-Bruix',
-    'Boulevard Mortier','Boulevard Poniatowski','Boulevard Soult','Boulevard des Capucines','Boulevard de la Chapelle',
-    'Boulevard de Clichy','Boulevard du Crime','Boulevard du Général-d\'Armée-Jean-Simon','Boulevard Haussmann',
-    'Boulevard de l\'Hôpital','Boulevard des Italiens','Boulevard Lefebvre','Boulevard de la Madeleine',
-    'Boulevard de Magenta','Boulevard Malesherbes','Boulevard Marguerite-de-Rochechouart','Boulevard Montmartre',
-    'Boulevard du Montparnasse','Boulevard Raspail','Boulevard Richard-Lenoir','Boulevard Saint-Germain',
-    'Boulevard Saint-Michel','Boulevard de Sébastopol','Boulevard de Strasbourg','Boulevard du Temple',
-    'Boulevard Voltaire','Boulevard de la Zone']
-
-    function pariseBoulevardSelection() {
-      console.log(parisBoulevard.filter(el => el.includes(' de ')))
-    }
+    // // 7. sort Exercise
+    // // Sort the people alphabetically by last name
+    // function sortPeopleByLastName() {
+    //   console.table(people.map(el => el.split(',')).sort().map(el => el.join(',').replaceAll(',', '')))
+    // }
     
-    pariseBoulevardSelection()
+    // sortPeopleByLastName()
 
-    // 7. sort Exercise
-    // Sort the people alphabetically by last name
-    function sortPeopleByLastName() {
-      console.log(people.map(el => el.split(',')).sort().map(el => el.join(',').replaceAll(',', '')))
-    }
+    // // 8. Reduce Exercise
+    // // Sum up the instances of each of these
+    // const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
     
-    sortPeopleByLastName()
+    // const car = data.filter(el => el === 'car').length
+    // const truck = data.filter(el => el === 'truck').length
+    // const bike = data.filter(el => el === 'bike').length
+    // const walk = data.filter(el => el === 'walk').length
+    // const van = data.filter(el => el === 'van').length
 
-    // 8. Reduce Exercise
-    // Sum up the instances of each of these
-    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-    
-    const car = data.filter(el => el === 'car').length
-    const truck = data.filter(el => el === 'truck').length
-    const bike = data.filter(el => el === 'bike').length
-    const walk = data.filter(el => el === 'walk').length
-    const van = data.filter(el => el === 'van').length
-
-    console.log(car)
-    console.log(truck)
-    console.log(bike)
-    console.log(walk)
-    console.log(van)
+    // console.log(car)
+    // console.log(truck)
+    // console.log(bike)
+    // console.log(walk)
+    // console.log(van)
     
   </script>
 </body>
